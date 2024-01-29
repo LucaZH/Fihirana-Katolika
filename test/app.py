@@ -5,7 +5,7 @@ from utils.Pagination import FihiranapPagination
 from utils.HiraBoky import HiraBoky
 from utils.TononKira import TononKira
 
-def scrape_and_save_hira_list(json_path='./utils/Fihirana.json', output_dir='./results/list-hira'):
+def scrape_and_save_hira_list(json_path='../utils/Fihirana.json', output_dir='./results/list-hira'):
     with open(json_path, 'r', encoding='utf-8') as json_file:
         json_data = json.load(json_file)
 
@@ -30,7 +30,7 @@ def scrape_and_save_hira_list(json_path='./utils/Fihirana.json', output_dir='./r
 
         list_hira.clear()
 
-def read_json_files(directory='./results/list-hira'):
+def read_json_files(directory='../results/list-hira'):
     json_files = [f for f in os.listdir(directory) if f.endswith('.json')]
 
     for json_file in json_files:
@@ -39,7 +39,7 @@ def read_json_files(directory='./results/list-hira'):
         with open(file_path, 'r', encoding='utf-8') as file:
             json_data = json.load(file)
             for element in json_data:
-                write_hira_into_json('./results/hira',element["link"],title_boky)
+                write_hira_into_json('../results/hira',element["link"],title_boky)
 
 def write_hira_into_json(output_dir, url, fihirana_title):
     output_filename = f"{output_dir}/{fihirana_title}"
