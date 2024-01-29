@@ -2,26 +2,27 @@ import json
 from utils.Pagination import FihiranapPagination
 from utils.HiraBoky import HiraBoky
 
-with open('./utils/Fihirana.json', 'r', encoding='utf-8') as json_file:
-    json_data = json.load(json_file)
+def scrape_and_save_hira_list(json_path='./utils/Fihirana.json', output_dir='./results/list-hira'):
+    with open(json_path, 'r', encoding='utf-8') as json_file:
+        json_data = json.load(json_file)
 
-for hira_info in json_data:
-    link = hira_info["link"]
-    title = hira_info["title"]
-    
-    pagination = FihiranapPagination(link)
-    pages = pagination.generate_pagination_links()
+    for hira_info in json_data:
+        link = hira_info["link"]
+        title = hira_info["title"]
 
-    list_hira = []
-    for page in pages:
-        katolika_scraper = HiraBoky(page, list_hira)
-        links_info_list = katolika_scraper.scrape_links_info()
+        pagination = FihiranapPagination(link)
+        pages = pagination.generate_pagination_links()
 
-    output_filename = f"./results/{title.lower().replace(' ', '_')}.json"
+        list_hira = []
+        for page in pages:
+            katolika_scraper = HiraBoky(page, list_hira)
+            links_info_list = katolika_scraper.scrape_links_info()
 
-    with open(output_filename, 'w', encoding='utf-8') as json_file:
-        json.dump(list_hira, json_file, ensure_ascii=False, indent=4)
+        output_filename = f"{output_dir}/{title.lower().replace(' ', '_')}.json"
 
-    print(f"Result for {title} has been written to {output_filename}")
+        with open(output_filename, 'w', encoding='utf-8') as json_file:
+            json.dump(list_hira, json_file, ensure_ascii=False, indent=4)
 
-    list_hira.clear
+        print(f"Result for {title} has been written to {output_filename}")
+
+        list_hira.clear()
