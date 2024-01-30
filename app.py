@@ -31,7 +31,7 @@ def get_hira_by_fihirana(fihirana_name):
     if fihirana_name in hira_by_fihirana:
         return jsonify(hira_by_fihirana[fihirana_name])
     else:
-        return jsonify({"error": "Fichier non trouvé"}), 404
+        return jsonify({"error": "Fichier not found"}), 404
 
 @app.route('/api/fihirana/search', methods=['GET'])
 def search_all_hira():
@@ -55,8 +55,23 @@ def search_hira_in_fihirana(fihirana_name):
         matching_hira = [{"title": match[0]} for match in matching_hira if match[1] > 50]
         return jsonify(matching_hira)
     else:
-        return jsonify({"error": "Hira non trouvé"}), 404
+        return jsonify({"error": "Hira not found"}), 404
 
+@app.route('/api/fihirana/<fihirana_name>/get', methods=['GET'])
+def get_hira(fihirana_name):
+    _hira = []
+    if fihirana_name in hira_by_fihirana:
+        get_hira_term = request.args.get('title', '')
 
+        for hira in hira_by_fihirana[fihirana_name]:
+            if get_hira_term == hira['title']:
+                _hira.append(hira)
+        if len(_hira)==0:
+            return jsonify({"error": "Hira not found"}), 404
+        else:
+            return jsonify(_hira[0]),200
+    else:
+        return jsonify({"error": "Fihirana not found"}), 404
+    
 if __name__ == '__main__':
     app.run(debug=True)
