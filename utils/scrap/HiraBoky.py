@@ -23,11 +23,11 @@ class HiraBoky:
         links_divs = self.boky_show.find_all('div', class_='row striped mb-3 p-2')
 
         for links_div in links_divs:
-            pejy_div = links_div.find('div', class_='col-1').get_text(strip=True)
+            page_div = links_div.find('div', class_='col-1').get_text(strip=True)
 
             link_elements = links_div.find_all('a')
 
             for link_element in link_elements:
                 link_text = link_element.get_text(strip=True)
                 link_href = link_element['href']
-                self.hira_list.append({"pejy": pejy_div, "title": link_text, "link": link_href})
+                self.hira_list.append({"page": page_div, "title": link_text, "link": link_href})
