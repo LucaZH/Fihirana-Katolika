@@ -123,7 +123,7 @@ curl -X GET http://your-api-url/api/hira/?search=Ianao ilay nirahina hanasitrana
 **Example Request:**
 
 ```bash
-curl -X GET http://your-api-url/api/ankalazao_ny_tompo/?search=Tsy ny (ahiahy) ahiahin'izao tontolo izao
+curl -X GET http://your-api-url/api/ankalazao_ny_tompo/hira?title=Tsy ny (ahiahy) ahiahin'izao tontolo izao
 ```
 
 **Example Response:**
@@ -131,12 +131,15 @@ curl -X GET http://your-api-url/api/ankalazao_ny_tompo/?search=Tsy ny (ahiahy) a
 ```json
 {
   "status": "success",
-  "data": [
-    {
-      "page": "534",
-      "title": "Tsy ny (ahiahy) ahiahin'izao tontolo izao"
-    },
-    ...
-  ]
+  "data": {
+    "content": [
+      "1 - Tsy ny ahiahin'izao tontolo izaoTsy afa-mandray ny Teninao akoryno lalana iantsoanao ahy ;Fa ny miahy 'zay sitraky ny RayIvelomako manana Anao !",
+      "Fiv :Jesoa Tomponay,Mahery ny antsom-pitiavanao,Ka misaotra re, ry Tompo \u00f4 !",
+      "2 - Tsy ny fitiavan'izao tontolo izaoTsy afa-mitia ankoatr'ireo 'zay tianyNo fiainana atoronao ahy ;Fa ny mitia 'zay sitraky ny RayIvelomako manana Anao !",
+      "3 - Tsy ny fiainan'izao tontolo izaoTsy afa-miandrandra famonjena akoryNo lanitra ajoronao ho ahy ;Fa ny harena sitraky ny RayIvelomako manana Anao !"
+    ],
+    "page": "534",
+    "title": "Tsy ny (ahiahy) ahiahin'izao tontolo izao"
+  }
 }
 ```
