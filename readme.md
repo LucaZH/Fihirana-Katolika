@@ -8,7 +8,7 @@ This API provides endpoints to access and search through a collection of hira (`
 
 #### 1. Get All Fihirana
 
-**Endpoint:** `/api/fihirana/all`  
+**Endpoint:** `/api/fihirana/`  
 **Method:** `GET`
 
 **Description:** Returns a JSON object containing all the hira categorized by their respective names.
@@ -16,83 +16,102 @@ This API provides endpoints to access and search through a collection of hira (`
 **Example Request:**
 
 ```bash
-curl -X GET http://your-api-url/api/fihirana/all
+curl -X GET http://your-api-url/api/fihirana/
 ```
 
 **Example Response:**
 
 ```json
-
+{
+  "status": "success",
+  "data": {
+    "ankalazao_ny_tompo": [...],
+    "antsao_ny_tompo": [...],
+    ...
+  }
+}
 ```
 
-#### 2. Get Hira by Fihirana
+#### 2. Get or Search Hira by Fihirana
 
-**Endpoint:** `/api/fihirana/<fihirana_name>`  
+**Endpoint:** `/api/<fihirana_name>/`  
 **Method:** `GET`
 
-**Description:** Returns a JSON object containing all hira for a specific `fihirana_name`.
+**Description:** Returns a JSON object containing all hira for a specific `fihirana_name`. Optionally, you can provide a `search` parameter to search for specific hira within the category.
 
 **Example Request:**
 
 ```bash
-curl -X GET http://your-api-url/api/fihirana/fihirana_dera
+curl -X GET http://your-api-url/api/fihirana_dera
 ```
 
 **Example Response:**
 
 ```json
-
+{
+  "status": "success",
+  "data": [
+    {
+      "page": "7",
+      "title": "Ianao ilay nirahina hanasitrana ny fo mivalo"
+    },
+    {
+      "page": "40",
+      "title": "Miankohofa mba hitsaoka"
+    },
+    ...
+  ]
+}
 ```
 
 #### 3. Search All Hira
 
-**Endpoint:** `/api/fihirana/search`  
+**Endpoint:** `/api/hira/`  
 **Method:** `GET`
 
 **Query Parameters:**
 
-- `q`: Search term
+- `search`: Search term
 
-**Description:** Searches all hira across different categories and returns matching results.
+**Description:** Searches all hira across different categories and returns matching data.
 
 **Example Request:**
 
 ```bash
-curl -X GET http://your-api-url/api/fihirana/search?q=example
+curl -X GET http://your-api-url/api/hira/?search=Ianao ilay nirahina hanasitrana ny fo mivalo
 ```
 
 **Example Response:**
 
 ```json
-
+{
+  "status": "success",
+  "data": {
+    "fihirana_dera": [
+      {
+        "title": "Ianao ilay nirahina hanasitrana ny fo mivalo"
+      },
+      {
+        "title": "Jesoa mpamindra fo"
+      },
+      {
+        "title": "Ahiratray ny masonay"
+      },
+      {
+        "title": "Jerosalema, ianao Si\u00f4na"
+      },
+      {
+        "title": "Tsarovy, ry Iaveh, ilay fanekena nataonao fahiny tamin'ny vahoakanao"
+      }
+    ],
+    ...
+  }
+}
 ```
 
-#### 4. Search Hira in Fihirana
+#### 4. Get Hira
 
-**Endpoint:** `/api/fihirana/<fihirana_name>/search`  
-**Method:** `GET`
-
-**Query Parameters:**
-
-- `q`: Search term
-
-**Description:** Searches hira within a specific `fihirana_name` category and returns matching results.
-
-**Example Request:**
-
-```bash
-curl -X GET http://your-api-url/api/fihirana/fihirana_dera/search?q=example
-```
-
-**Example Response:**
-
-```json
-[{ "title": "Example Hira 1" }, { "title": "Example Hira 2" }]
-```
-
-#### 5. Get Hira
-
-**Endpoint:** `/api/fihirana/<fihirana_name>/get`  
+**Endpoint:** `/api/<fihirana_name>/hira`  
 **Method:** `GET`
 
 **Query Parameters:**
@@ -104,21 +123,20 @@ curl -X GET http://your-api-url/api/fihirana/fihirana_dera/search?q=example
 **Example Request:**
 
 ```bash
-curl -X GET http://your-api-url/api/fihirana/fihirana_dera/get?title=Example%20Hira%201
+curl -X GET http://your-api-url/api/ankalazao_ny_tompo/?search=Tsy ny (ahiahy) ahiahin'izao tontolo izao
 ```
 
 **Example Response:**
 
 ```json
-{ "title": "Example Hira 1" }
+{
+  "status": "success",
+  "data": [
+    {
+      "page": "534",
+      "title": "Tsy ny (ahiahy) ahiahin'izao tontolo izao"
+    },
+    ...
+  ]
+}
 ```
-
-### Running the API
-
-To run the API, execute the following command in your terminal:
-
-```bash
-python app.py
-```
-
-The API will be available at `http://127.0.0.1:5000/` by default. Make sure to update the base URL in the examples accordingly.
