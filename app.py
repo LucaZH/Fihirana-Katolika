@@ -18,13 +18,14 @@ def get_or_search_hira_by_fihirana(fihirana_name):
     if fihirana_name in hira_by_fihirana:
         search_term = request.args.get('search', None)
         if search_term:
-            matching_hira = process.extract(search_term, [hira["title"] for hira in hira_by_fihirana[fihirana_name]], limit=5)
-            matching_hira = [{"title": match[0]} for match in matching_hira if match[1] > 50]
+            matching_hira = process.extract(search_term, [{"title": hira["title"], "page": hira.get("page", "")} for hira in hira_by_fihirana[fihirana_name]], limit=5)
+            matching_hira = [match[0] for match in matching_hira if match[1] > 50]
             if not matching_hira:
                 return {"status": "failure", "message": "No matching hira found"}, 404
             return {"status": "success", "data": matching_hira}, 200
         else:
-            return {"status": "success", "data": hira_by_fihirana[fihirana_name]}, 200
+            data = [{"title": hira["title"], "page": hira["page"]} for hira in hira_by_fihirana[fihirana_name]]
+            return {"status": "success", "data": data}, 200
     else:
         return {"status": "failure", "message": f"No fihirana found with name {fihirana_name}"}, 404
 
