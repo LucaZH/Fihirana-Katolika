@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from "react";
 
 const API_URL = "http://localhost:5000/api/fihirana/";
 
-function Fihirana() {
+function ListFihirana() {
   const [fihirana, setFihirana] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -30,4 +30,4 @@ function Fihirana() {
     </div>
   );
 }
-export default Fihirana;
+export default ListFihirana;
