@@ -4,8 +4,8 @@ import Hira from "../components/Hira";
 
 const HiraWrapper: FC = () => {
   const { fihirana, hira } = useParams<{ fihirana: string; hira: string }>();
-  const safeFihirana = decodeURIComponent(fihirana) || "defaultFihirana";
-  const safeHira = decodeURIComponent(hira) || "defaultHira";
+  const safeFihirana = decodeURIComponent(fihirana ?? "");
+  const safeHira = decodeURIComponent(hira ?? "");
 
   return <Hira fihirana={safeFihirana} hira={safeHira} />;
 };
