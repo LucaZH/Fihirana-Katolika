@@ -8,7 +8,7 @@ const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<PHira />} />
-        <Route path="/hira/:fihirana/:hira" element={<HiraWrapper />} />
+        <Route path="/:fihirana/:hira" element={<HiraWrapper />} />
       </Routes>
     </BrowserRouter>
   );
