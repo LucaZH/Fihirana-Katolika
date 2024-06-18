@@ -1,17 +1,19 @@
 from flask import Flask, request
+from flask_cors import CORS
 from data_loader import load_data
 from fuzzywuzzy import process
 import json
 
 app = Flask(__name__)
+CORS(app)
 hira_by_fihirana = load_data()
 
 @app.route('/api/fihirana/', methods=['GET'])
 def get_all_fihirana():
     if not hira_by_fihirana:
         return {"status": "failure", "message": "No fihirana found"}, 404
-
-    return {"status": "success", "data": hira_by_fihirana}, 200
+    data = [{fihirana:fihirana.capitalize().replace('_',' ')} for fihirana in hira_by_fihirana.keys()]
+    return {"status": "success", "data": data}, 200
 
 @app.route('/api/<fihirana_name>/', methods=['GET'])
 def get_or_search_hira_by_fihirana(fihirana_name):
@@ -41,7 +43,7 @@ def search_all_hira():
 
     if not data:
         return {"status": "failure", "message": "No matching hira found"}, 404
-
+    print(data)
     return {"status": "success", "data": data}, 200
 
 @app.route('/api/<fihirana_name>/hira', methods=['GET'])
