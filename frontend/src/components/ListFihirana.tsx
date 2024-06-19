@@ -1,4 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const API_URL = "http://localhost:5000/api/fihirana/";
 
@@ -20,14 +21,18 @@ function ListFihirana() {
   }
 
   return (
-    <div>
-      <h1>Liste des Fihirana</h1>
-      <ul>
+    <main>
+      <h1 className="text-5xl text-center m-10">Liste des Fihirana</h1>
+      <div className="grid grid-cols-3 gap-10 text-center m-10">
         {fihirana.map((boky, index) => (
-          <li key={index}>{Object.values(boky)[0] as ReactNode}</li>
+          <Link to={`/${Object.keys(boky)[0]}`}>
+            <p className="bg-blue-200 p-10 rounded-md" key={index}>
+              {Object.values(boky)[0] as ReactNode}
+            </p>
+          </Link>
         ))}
-      </ul>
-    </div>
+      </div>
+    </main>
   );
 }
 export default ListFihirana;
