@@ -19,17 +19,25 @@ const Fihirana: FC<{ fihirana: string }> = ({ fihirana }) => {
   }
   return (
     <div>
-      <h1>{fihirana}</h1>
-      <ul>
+      <h1 className="text-5xl mx-16 mb-10 mt-10">
+        {fihirana
+          .replace(/_/g, " ")
+          .split(" ")
+          .map(
+            (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+          )
+          .join(" ")}
+      </h1>
+      <div className="flex flex-col gap-6 mx-16">
         {hira.map((boky, index) => (
-          <li key={index}>
+          <div key={index} className="bg-blue-100 p-4">
             <Link to={`/${fihirana}/${Object.values(boky)[1]}`}>
               <p>{Object.values(boky)[1] as ReactNode}</p>
-              <span>{Object.values(boky)[0] as ReactNode}</span>
+              <span>Page: {Object.values(boky)[0] as ReactNode}</span>
             </Link>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
