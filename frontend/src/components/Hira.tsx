@@ -27,16 +27,18 @@ const Hira: FC<{ fihirana: string; hira: string }> = ({ fihirana, hira }) => {
   }
 
   return (
-    <main>
-      <h1>{Newfihirana}</h1>
-      <div>
-        <h2>{Nhira?.title}</h2>
+    <main className="p-16">
+      <h1 className="text-4xl">{Newfihirana}</h1>
+      <div className="text-justify">
+        <h2 className="text-3xl">{Nhira?.title}</h2>
         <p>
           {Newfihirana}: {Nhira?.page}
         </p>
-        {Nhira?.content.map((item, index) => (
-          <p key={index}>{item}</p>
-        ))}
+        <div className="space-y-4 py-6">
+          {Nhira?.content.map((item, index) => (
+            <p key={index}>{item}</p>
+          ))}
+        </div>
       </div>
     </main>
   );
