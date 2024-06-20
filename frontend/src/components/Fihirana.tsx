@@ -1,5 +1,7 @@
 import { FC, ReactNode, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import HiraSearch from "./HiraSearch";
+import SearchBar from "./ui/SearchBar";
 const API_URL = "http://localhost:5000/api/";
 const Fihirana: FC<{ fihirana: string }> = ({ fihirana }) => {
   const [hira, setHira] = useState([]);
@@ -28,7 +30,11 @@ const Fihirana: FC<{ fihirana: string }> = ({ fihirana }) => {
           )
           .join(" ")}
       </h1>
-      <div className="flex flex-col gap-6 mx-16">
+      <div className="mx-16 w-full">
+        <SearchBar />
+      </div>
+
+      <div className="flex flex-col gap-6 mx-16 mt-4">
         {hira.map((boky, index) => (
           <div key={index} className="bg-blue-100 p-4">
             <Link to={`/${fihirana}/${Object.values(boky)[1]}`}>
